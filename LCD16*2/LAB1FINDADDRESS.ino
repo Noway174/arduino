@@ -35,5 +35,5 @@ void loop() {
   else
     Serial.println("done\n");
 
-  delay(5000);           // สแกนซ้ำทุกๆ 5 วินาที
+  delay(5000);
 }
