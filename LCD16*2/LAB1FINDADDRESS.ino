@@ -3,8 +3,8 @@
 void setup() {
   Wire.begin();
   Serial.begin(9600);
-  while (!Serial);             // รอจนกว่า Serial Monitor จะเปิด
-  Serial.println("\nI2C Scanner Starting...");
+
+  Serial.println("I2C Scanner");
 }
 
 void loop() {
@@ -13,27 +13,24 @@ void loop() {
 
   Serial.println("Scanning...");
 
-  for(address = 1; address < 127; address++ ) {
+  for (address = 1; address < 127; address++) {
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
 
     if (error == 0) {
       Serial.print("I2C device found at address 0x");
-      if (address < 16) Serial.print("0");
-      Serial.print(address, HEX);
-      Serial.println("  !");
+      if (address < 16)
+        Serial.print("0");
+      Serial.println(address, HEX);
+
       nDevices++;
     }
-    else if (error == 4) {
-      Serial.print("Unknown error at address 0x");
-      if (address < 16) Serial.print("0");
-      Serial.println(address, HEX);
-    }    
   }
+
   if (nDevices == 0)
     Serial.println("No I2C devices found\n");
   else
-    Serial.println("done\n");
+    Serial.println("Done\n");
 
   delay(5000);
 }
